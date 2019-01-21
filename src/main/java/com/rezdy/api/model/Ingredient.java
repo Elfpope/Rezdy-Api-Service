@@ -1,9 +1,11 @@
 package com.rezdy.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public class Ingredient {
 
+  @JsonValue
   private String title;
 
   @JsonProperty("best-before")

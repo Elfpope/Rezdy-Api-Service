@@ -25,6 +25,12 @@ import com.rezdy.api.repository.impl.RecipeRepositoryImpl;
 public class RezdyApiServiceApplication {
   private static Logger LOG = LoggerFactory.getLogger(RezdyApiServiceApplication.class);
 
+  @Value("classpath:${ingredients.file.source}")
+  private Resource ingredientsFileSource;
+
+  @Value("classpath:${recipes.file.source}")
+  private Resource recipesFileSource;
+
 
   public static void main(String[] args) {
     ApplicationContext context = SpringApplication.run(RezdyApiServiceApplication.class, args);
@@ -36,12 +42,6 @@ public class RezdyApiServiceApplication {
     LOG.info("recipes from REPO: " + recipeRepo.findAll().toString());
 
   }
-
-  @Value("classpath:${ingredients.file.source}")
-  private Resource ingredientsFileSource;
-
-  @Value("classpath:${recipes.file.source}")
-  private Resource recipesFileSource;
 
   @Bean(name = "ingredientsFromJson")
   public List<Ingredient> getIngredientsFromJson() {
