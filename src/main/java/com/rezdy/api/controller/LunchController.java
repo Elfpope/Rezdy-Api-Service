@@ -1,5 +1,6 @@
 package com.rezdy.api.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +19,16 @@ public class LunchController {
   public List<Recipe> getAvailableRecipes(
       @RequestParam(value = "use-by", required = false) boolean useBy,
       @RequestParam(value = "best-before", required = false) boolean bestBefore) {
-    if (!useBy && !bestBefore) {
-      return lunchRepo.findRecipesIfIngredientsAvailable();
-    } else if (useBy && !bestBefore) {
-      return lunchRepo.findRecipesBeforeUseBy();
-    } else if (bestBefore) {
-      return lunchRepo.findRecipesBetweenBestBeforeAndUseBy();
-    }
 
-    return null;
+    List<Recipe> result = new ArrayList<>();
+    if (!useBy && !bestBefore) {
+      result = lunchRepo.findRecipesIfIngredientsAvailable();
+    } else if (useBy && !bestBefore) {
+      result = lunchRepo.findRecipesBeforeUseBy();
+    } else if (bestBefore) {
+      result = lunchRepo.findRecipesBetweenBestBeforeAndUseBy();
+    }
+    return result;
   }
 
 }

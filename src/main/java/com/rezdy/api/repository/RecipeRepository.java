@@ -6,5 +6,4 @@ import com.rezdy.api.model.Recipe;
 
 public interface RecipeRepository {
   List<Recipe> findAll();
-
 }

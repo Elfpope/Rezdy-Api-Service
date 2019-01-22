@@ -18,5 +18,4 @@ public class RecipeRepositoryImpl implements RecipeRepository {
   public List<Recipe> findAll() {
     return recipes;
   }
-
 }
