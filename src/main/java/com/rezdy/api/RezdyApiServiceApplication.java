@@ -10,16 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rezdy.api.model.Ingredient;
 import com.rezdy.api.model.Recipe;
-import com.rezdy.api.repository.IngredientRepository;
-import com.rezdy.api.repository.impl.IngredientRepositoryImpl;
-import com.rezdy.api.repository.impl.RecipeRepositoryImpl;
 
 /**
  * It is responsible for starting up the application and data initialization.
@@ -43,13 +39,7 @@ public class RezdyApiServiceApplication {
    * @param args passed in via CLI
    */
   public static void main(String[] args) {
-    ApplicationContext context = SpringApplication.run(RezdyApiServiceApplication.class, args);
-
-    IngredientRepository ingredientRepo = context.getBean(IngredientRepositoryImpl.class);
-    LOG.debug("ingredients from REPO: " + ingredientRepo.findAll().toString());
-
-    RecipeRepositoryImpl recipeRepo = context.getBean(RecipeRepositoryImpl.class);
-    LOG.debug("recipes from REPO: " + recipeRepo.findAll().toString());
+    SpringApplication.run(RezdyApiServiceApplication.class, args);
   }
 
   /**

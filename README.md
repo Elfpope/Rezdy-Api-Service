@@ -19,8 +19,8 @@ This is a coding test from Rezdy.
 The following service are implemented.
 ```
 /lunch
-lunch?use-by=true
-lunch?best-before=true
+/lunch?use-by=true
+/lunch?best-before=true
 ```
 
 
