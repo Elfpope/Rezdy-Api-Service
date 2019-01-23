@@ -2,6 +2,12 @@ package com.rezdy.api.model;
 
 import java.util.List;
 
+/**
+ * Model class to map recipe.
+ * 
+ * @author junfeng
+ *
+ */
 public class Recipe {
   private String title;
   private List<Ingredient> ingredients;

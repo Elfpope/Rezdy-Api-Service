@@ -7,6 +7,12 @@ import org.springframework.stereotype.Repository;
 import com.rezdy.api.model.Recipe;
 import com.rezdy.api.repository.RecipeRepository;
 
+/**
+ * It is a implementation of {@link RecipeRepository}.
+ * 
+ * @author junfeng
+ *
+ */
 @Repository
 public class RecipeRepositoryImpl implements RecipeRepository {
 
@@ -14,6 +20,9 @@ public class RecipeRepositoryImpl implements RecipeRepository {
   @Qualifier("recipesFromJson")
   private List<Recipe> recipes;
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<Recipe> findAll() {
     return recipes;

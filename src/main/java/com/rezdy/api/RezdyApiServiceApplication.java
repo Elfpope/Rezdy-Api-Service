@@ -1,10 +1,6 @@
 package com.rezdy.api;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,13 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rezdy.api.model.Ingredient;
 import com.rezdy.api.model.Recipe;
 import com.rezdy.api.repository.IngredientRepository;
 import com.rezdy.api.repository.impl.IngredientRepositoryImpl;
 import com.rezdy.api.repository.impl.RecipeRepositoryImpl;
+import com.rezdy.api.util.Constants;
+import com.rezdy.api.util.JsonUtils;
 
 /**
  * It is responsible for starting up the application and data initialization.
@@ -59,19 +55,8 @@ public class RezdyApiServiceApplication {
    */
   @Bean(name = "ingredientsFromJson")
   public List<Ingredient> getIngredientsFromJson() {
-    Map<String, List<Ingredient>> allIngredients = new HashMap<>();
-    ObjectMapper mapper = new ObjectMapper();
-    try {
-      allIngredients = mapper.readValue(ingredientsFileSource.getInputStream(),
-          new TypeReference<Map<String, List<Ingredient>>>() {});
-    } catch (IOException exception) {
-      LOG.error("Encountered an error when loading ingredients.json");
-      exception.printStackTrace();
-    }
-
-    LOG.debug("all ingredients: " + allIngredients.toString());
-
-    return allIngredients.getOrDefault("ingredients", new ArrayList<>());
+    return JsonUtils.getDataFromJson(ingredientsFileSource, Constants.INGREDIENTS_KEY,
+        Ingredient.class);
   }
 
   /**
@@ -81,19 +66,7 @@ public class RezdyApiServiceApplication {
    */
   @Bean(name = "recipesFromJson")
   public List<Recipe> getRecipesFromJson() {
-    Map<String, List<Recipe>> allRecipes = new HashMap<>();
-    ObjectMapper mapper = new ObjectMapper();
-    try {
-      allRecipes = mapper.readValue(recipesFileSource.getInputStream(),
-          new TypeReference<Map<String, List<Recipe>>>() {});
-    } catch (IOException exception) {
-      LOG.error("Encountered an error when loading recipes.json");
-      exception.printStackTrace();
-    }
-
-    LOG.debug("all recipes: " + allRecipes.toString());
-
-    return allRecipes.getOrDefault("recipes", new ArrayList<>());
+    return JsonUtils.getDataFromJson(recipesFileSource, Constants.RECIPES_KEY, Recipe.class);
   }
 
 }

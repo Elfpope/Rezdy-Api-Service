@@ -7,6 +7,12 @@ import org.springframework.util.StringUtils;
 import com.rezdy.api.model.Recipe;
 import com.rezdy.api.util.DateUtils;
 
+/**
+ * It encapsulates custom comparison logic for {@link Recipe}.
+ * 
+ * @author junfeng
+ *
+ */
 public class RecipeComparatorByIngredientBestBefore implements Comparator<Recipe> {
 
   /**

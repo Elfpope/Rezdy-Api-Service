@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rezdy.api.model.Recipe;
 import com.rezdy.api.repository.LunchRepository;
 
+/**
+ * It handles RESTful web service request for "/lunch" resource.
+ * 
+ * @author junfeng
+ *
+ */
 @RestController
 public class LunchController {
 

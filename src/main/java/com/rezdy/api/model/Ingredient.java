@@ -3,6 +3,12 @@ package com.rezdy.api.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * Model class to map ingredient.
+ * 
+ * @author junfeng
+ *
+ */
 public class Ingredient {
 
   @JsonValue

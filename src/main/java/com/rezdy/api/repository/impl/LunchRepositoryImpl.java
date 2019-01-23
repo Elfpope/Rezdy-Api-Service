@@ -13,6 +13,12 @@ import com.rezdy.api.repository.IngredientRepository;
 import com.rezdy.api.repository.LunchRepository;
 import com.rezdy.api.repository.RecipeRepository;
 
+/**
+ * It is a implementation of {@link LunchRepository}.
+ * 
+ * @author junfeng
+ *
+ */
 @Repository
 public class LunchRepositoryImpl implements LunchRepository {
 
@@ -22,6 +28,9 @@ public class LunchRepositoryImpl implements LunchRepository {
   @Autowired
   private RecipeRepository recipeRepo;
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<Recipe> findRecipesIfIngredientsAvailable() {
     List<Recipe> result = new ArrayList<>();
@@ -44,6 +53,9 @@ public class LunchRepositoryImpl implements LunchRepository {
     return result;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<Recipe> findRecipesBeforeUseBy() {
     List<Recipe> result = new ArrayList<>();
@@ -68,6 +80,9 @@ public class LunchRepositoryImpl implements LunchRepository {
     return result;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<Recipe> findRecipesBetweenBestBeforeAndUseBy() {
     List<Recipe> result = findRecipesBeforeUseBy();

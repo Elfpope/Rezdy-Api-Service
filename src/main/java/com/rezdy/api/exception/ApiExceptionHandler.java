@@ -8,11 +8,17 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**
+ * It encapsulates custom API exception handling logic.
+ * 
+ * @author junfeng
+ *
+ */
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
   /*
-   * Sample request: http://localhost:12345/lunch?use-by=trues
+   * Refine mismatch type exception. For example, http://localhost:12345/lunch?use-by=trues
    * 
    * (non-Javadoc)
    * 
@@ -27,5 +33,4 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     ApiError apiError = new ApiError(status, "Invalid parameter value.", ex);
     return new ResponseEntity<>(apiError, apiError.getStatus());
   }
-
 }
