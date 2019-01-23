@@ -9,7 +9,7 @@ This is a coding test from Rezdy.
 ### How To Run
 - ensure JDK 1.8+ is used and port number 12345 is available
 - build the project using Maven (a jar file will be created)
-- put the above jar file and the input file in the same folder
+- navigate to the folder containing the above jar file
 - execute the jar with below command
 ```
   java -jar rezdy-api-service-0.0.1-SNAPSHOT.jar
