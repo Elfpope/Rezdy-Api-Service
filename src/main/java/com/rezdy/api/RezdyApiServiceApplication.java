@@ -21,6 +21,12 @@ import com.rezdy.api.repository.IngredientRepository;
 import com.rezdy.api.repository.impl.IngredientRepositoryImpl;
 import com.rezdy.api.repository.impl.RecipeRepositoryImpl;
 
+/**
+ * It is responsible for starting up the application and data initialization.
+ * 
+ * @author junfeng
+ *
+ */
 @SpringBootApplication
 public class RezdyApiServiceApplication {
   private static Logger LOG = LoggerFactory.getLogger(RezdyApiServiceApplication.class);
@@ -31,18 +37,26 @@ public class RezdyApiServiceApplication {
   @Value("classpath:${recipes.file.source}")
   private Resource recipesFileSource;
 
-
+  /**
+   * Spring boot application entry point
+   * 
+   * @param args passed in via CLI
+   */
   public static void main(String[] args) {
     ApplicationContext context = SpringApplication.run(RezdyApiServiceApplication.class, args);
 
     IngredientRepository ingredientRepo = context.getBean(IngredientRepositoryImpl.class);
-    LOG.info("ingredients from REPO: " + ingredientRepo.findAll().toString());
+    LOG.debug("ingredients from REPO: " + ingredientRepo.findAll().toString());
 
     RecipeRepositoryImpl recipeRepo = context.getBean(RecipeRepositoryImpl.class);
-    LOG.info("recipes from REPO: " + recipeRepo.findAll().toString());
-
+    LOG.debug("recipes from REPO: " + recipeRepo.findAll().toString());
   }
 
+  /**
+   * Load ingredient data from file "ingredients.json"
+   * 
+   * @return a list of {@link Ingredient} loaded from file "ingredients.json"
+   */
   @Bean(name = "ingredientsFromJson")
   public List<Ingredient> getIngredientsFromJson() {
     Map<String, List<Ingredient>> allIngredients = new HashMap<>();
@@ -55,11 +69,16 @@ public class RezdyApiServiceApplication {
       exception.printStackTrace();
     }
 
-    LOG.info("all ingredients: " + allIngredients.toString());
+    LOG.debug("all ingredients: " + allIngredients.toString());
 
     return allIngredients.getOrDefault("ingredients", new ArrayList<>());
   }
 
+  /**
+   * Load recipe data from file "recipes.json"
+   * 
+   * @return a list of {@link Recipe} loaded from file "recipes.json"
+   */
   @Bean(name = "recipesFromJson")
   public List<Recipe> getRecipesFromJson() {
     Map<String, List<Recipe>> allRecipes = new HashMap<>();
@@ -72,7 +91,7 @@ public class RezdyApiServiceApplication {
       exception.printStackTrace();
     }
 
-    LOG.info("all recipes: " + allRecipes.toString());
+    LOG.debug("all recipes: " + allRecipes.toString());
 
     return allRecipes.getOrDefault("recipes", new ArrayList<>());
   }

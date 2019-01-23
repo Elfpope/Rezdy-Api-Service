@@ -41,7 +41,6 @@ public class LunchRepositoryImpl implements LunchRepository {
       }
     }
 
-    replaceIngredients(result);
     return result;
   }
 
@@ -72,6 +71,7 @@ public class LunchRepositoryImpl implements LunchRepository {
   @Override
   public List<Recipe> findRecipesBetweenBestBeforeAndUseBy() {
     List<Recipe> result = findRecipesBeforeUseBy();
+    replaceIngredients(result);
     result.sort(new RecipeComparatorByIngredientBestBefore());
     return result;
   }
@@ -86,14 +86,14 @@ public class LunchRepositoryImpl implements LunchRepository {
     if (recipes == null || recipes.isEmpty()) {
       return;
     }
-  
+
     for (Recipe recipe : recipes) {
       ListIterator<Ingredient> listIterator = recipe.getIngredients().listIterator();
-  
+
       while (listIterator.hasNext()) {
         Ingredient ingredient = listIterator.next();
         Ingredient ingredientWithDateInfo = ingredientRepo.findByTitle(ingredient.getTitle());
-  
+
         if (ingredientWithDateInfo != null) {
           listIterator.remove();
           listIterator.add(ingredientWithDateInfo);
